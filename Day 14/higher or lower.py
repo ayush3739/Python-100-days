@@ -2,7 +2,7 @@ import random
 import images
 import data
 import os
-
+#checking if it is changing in the github or not
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
