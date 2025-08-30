@@ -14,8 +14,8 @@ import datetime as dt
 import smtplib
 import random
 
-my_email="ayushmaurya21806@gmail.com"
-passw="kbeg kpfx pceu vyqa"
+my_email="Your mail here"
+passw="Your pass key"
 
 
 data=pd.read_csv('birthdays.csv')

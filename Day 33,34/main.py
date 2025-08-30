@@ -3,10 +3,10 @@ from datetime import datetime
 import smtplib
 import time
 
-my_email="ayushmaurya21806@gmail.com"
-passw="kbeg kpfx pceu vyqa"
-MY_LAT = 24.391128 # Your latitude
-MY_LONG = 74.860751 # Your longitude
+my_email="Ypur mail here"
+passw="Yo8ur pass_key"
+MY_LAT =  'Your latitude'
+MY_LONG =  'Your longitude'
 
 def check_position():
     
@@ -56,7 +56,7 @@ def is_night():
 
                 connection.sendmail(
                     from_addr=my_email,
-                    to_addrs="gokuthesaiyan370@gmail.com",
+                    to_addrs="reciever's mail",
                     msg="Subject: Iss position with the datetime\n\nlook up at the sky."
                     )
 

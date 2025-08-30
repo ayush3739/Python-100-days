@@ -6,8 +6,8 @@ time_now=dt.datetime.now()
 
 
 parameter={
-    'lat':20.593683,
-    'lng':78.962883,
+    'lat':'Your latitude',
+    'lng':'Your longitude',
     'formatted':0,
 }
 

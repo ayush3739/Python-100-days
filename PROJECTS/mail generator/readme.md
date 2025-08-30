@@ -1,1 +1,0 @@
-Birrthday and quote genrator 
