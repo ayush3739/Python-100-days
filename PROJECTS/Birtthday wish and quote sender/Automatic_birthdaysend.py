@@ -14,8 +14,8 @@ import datetime as dt
 import smtplib
 import random
 
-my_email="ayushmaurya21806@gmail.com"
-passw="kbeg kpfx pceu vyqa"
+my_email="Your email-here"
+passw="Your password"
 
 
 data=pd.read_csv('birthdays.csv')
@@ -64,3 +64,4 @@ with smtplib.SMTP("smtp.gmail.com") as connection:
         to_addrs=data.email,
         msg=f"subject:Quote of the day\n\n{quote}"
     )
+
