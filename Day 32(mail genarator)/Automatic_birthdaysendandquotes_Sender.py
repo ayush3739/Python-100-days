@@ -14,8 +14,8 @@ import datetime as dt
 import smtplib
 import random
 
-my_email="Your mail here"
-passw="Your pass key"
+my_email="Your email-here"
+passw="Your password"
 
 
 data=pd.read_csv('birthdays.csv')
@@ -28,6 +28,8 @@ birthdays_dict = {
 now=dt.datetime.now()
 day=now.day
 month=now.month
+weekday=now.isoweekday()
+
 
 if (month,day) in birthdays_dict:
     birthday_person = birthdays_dict[(month, day)]
@@ -47,3 +49,19 @@ if (month,day) in birthdays_dict:
             to_addrs=birthday_email,
             msg=f"Subject:Happy Birthday!\n\n{contents}"
         )
+
+
+with open("quotes.txt","r") as file:
+    all_quotes=file.readlines()
+    quote=random.choice(all_quotes)
+
+with smtplib.SMTP("smtp.gmail.com") as connection:
+    connection.starttls()
+
+    connection.login(user=my_email,password=passw)
+    connection.sendmail(
+        from_addr=my_email,
+        to_addrs=data.email,
+        msg=f"subject:Quote of the day\n\n{quote}"
+    )
+
