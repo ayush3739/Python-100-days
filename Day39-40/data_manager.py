@@ -3,7 +3,6 @@ import requests
 from requests.auth import HTTPBasicAuth
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
 load_dotenv()
 
 SHEETY_PRICES_ENDPOINT = os.getenv('SHEETY_PRICES_ENDPOINT')
@@ -19,21 +18,17 @@ class DataManager:
         self.destination_data = {}
 
     def get_destination_data(self):
-        # Use the Sheety API to GET all the data in that sheet and print it out.
         response = requests.get(url=SHEETY_PRICES_ENDPOINT, auth=self._authorization)
         data = response.json()
         print("API Response:", data)
         print("Available keys:", list(data.keys()) if isinstance(data, dict) else "Response is not a dictionary")
         
-        # Check if the response has the expected structure
         if "prices" in data:
             self.destination_data = data["prices"]
         else:
-            # Handle different possible response structures
             if isinstance(data, list):
                 self.destination_data = data
             elif isinstance(data, dict) and len(data) == 1:
-                # If there's only one key, use its value
                 key = list(data.keys())[0]
                 self.destination_data = data[key]
             else:
@@ -42,8 +37,6 @@ class DataManager:
         
         return self.destination_data
 
-    # In the DataManager Class make a PUT request and use the row id from sheet_data
-    # to update the Google Sheet with the IATA codes. (Do this using code).
     def update_destination_codes(self):
         for city in self.destination_data:
             new_data = {

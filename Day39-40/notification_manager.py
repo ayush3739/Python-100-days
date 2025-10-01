@@ -2,7 +2,6 @@ import os
 from twilio.rest import Client
 import smtplib
 
-# Using a .env file to retrieve the phone numbers and tokens.
 
 class NotificationManager:
 
@@ -38,11 +37,8 @@ class NotificationManager:
             body=message_body,
             to=os.environ["TWILIO_VIRTUAL_NUMBER"]
         )
-        # Prints if successfully sent.
         print(message.sid)
 
-    # Is SMS not working for you or prefer whatsapp? Connect to the WhatsApp Sandbox!
-    # https://console.twilio.com/us1/develop/sms/try-it-out/whatsapp-learn
     def send_whatsapp(self, message_body):
         message = self.client.messages.create(
             from_=f'whatsapp:{os.environ["TWILIO_WHATSAPP_NUMBER"]}',
@@ -50,12 +46,12 @@ class NotificationManager:
             to=f'whatsapp:{os.environ["TWILIO_VERIFIED_NUMBER"]}'
         )
         print(message.sid)
+        
     def send_emails(self, email_list, email_body):
         with smtplib.SMTP("smtp.gmail.com") as connection:
             connection.starttls()
             connection.login(user=self.email, password=self.app_pass)
             
-            # Create a properly formatted email message with headers
             subject = "Flight Price Alert!"
             message = f"Subject: {subject}\n\n{email_body}"
              
@@ -64,4 +60,3 @@ class NotificationManager:
                 to_addrs=email_list,
                 msg=message
             )
-
