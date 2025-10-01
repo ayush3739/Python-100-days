@@ -3,7 +3,6 @@ from datetime import datetime
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
 load_dotenv()
 
 IATA_ENDPOINT = "https://test.api.amadeus.com/v1/reference-data/locations/cities"
@@ -27,7 +26,6 @@ class FlightSearch:
         """
         self._api_key = os.environ["AMADEUS_API_KEY"]
         self._api_secret = os.environ["AMADEUS_SECRET"]
-        # Getting a new token every time program is run. Could reuse unexpired tokens as an extension.
         self._token = self._get_new_token()
 
     def _get_new_token(self):
@@ -41,7 +39,6 @@ class FlightSearch:
         Returns:
             str: The new access token obtained from the API response.
         """
-        # Header with content type as per Amadeus documentation
         header = {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -52,7 +49,6 @@ class FlightSearch:
         }
         response = requests.post(url=TOKEN_ENDPOINT, headers=header, data=body)
 
-        # New bearer token. Typically expires in 1799 seconds (30min)
         print(f"Your token is {response.json()['access_token']}")
         print(f"Your token expires in {response.json()['expires_in']} seconds")
         return response.json()['access_token']
@@ -125,7 +121,6 @@ class FlightSearch:
         provides a link to the API documentation for status code details.
         """
 
-        # print(f"Using this token to check_flights() {self._token}")
         headers = {"Authorization": f"Bearer {self._token}"}
         query = {
             "originLocationCode": origin_city_code,

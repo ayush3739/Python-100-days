@@ -38,7 +38,6 @@ def find_cheapest_flight(data):
      FlightData object with the details of the most affordable flight.
     """
 
-    # Handle empty data if no flight or Amadeus rate limit exceeded
     if data is None or not data['data']:
         print("No flight data")
         return FlightData(price="N/A",
@@ -48,7 +47,6 @@ def find_cheapest_flight(data):
             return_date="N/A",
             stops="N/A")
 
-    # Data from the first flight in the json
     first_flight = data['data'][0]
     lowest_price = float(first_flight["price"]["grandTotal"])
     origin = first_flight["itineraries"][0]["segments"][0]["departure"]["iataCode"]
@@ -57,7 +55,6 @@ def find_cheapest_flight(data):
     return_date = first_flight["itineraries"][1]["segments"][0]["departure"]["at"].split("T")[0]
     stops = len(first_flight["itineraries"][0]["segments"]) - 1
 
-    # Initialize FlightData with the first flight for comparison
     cheapest_flight = FlightData(lowest_price, origin, destination, out_date, return_date, stops)
 
     for flight in data["data"]:
