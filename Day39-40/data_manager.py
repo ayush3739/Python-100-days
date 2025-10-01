@@ -1,46 +1,63 @@
-import os 
-from dotenv import load_dotenv
+import os
 import requests
-from pprint import pprint
+from requests.auth import HTTPBasicAuth
+from dotenv import load_dotenv
 
-load_dotenv(".env")
+# Load environment variables from .env file
+load_dotenv()
 
-TOKEN=os.getenv("TOKEN")
-sheety_headers={
-    "Authorization": f"Bearer {TOKEN}"
-}
-
-
+SHEETY_PRICES_ENDPOINT = os.getenv('SHEETY_PRICES_ENDPOINT')
+Sheety_users_endpoint=os.getenv('Sheety_users_endpoint')
 
 
 class DataManager:
-    #This class is responsible for talking to the Google Sheet.
+
     def __init__(self):
-        self.sheety_url="https://api.sheety.co/34b68a6debe76b0bdf371fb057e52483/flightDeals/prices"
-        self.get_data()
+        self._user = os.environ["SHEETY_USRERNAME"]
+        self._password = os.environ["SHEETY_PASSWORD"]
+        self._authorization = HTTPBasicAuth(self._user, self._password)
+        self.destination_data = {}
+
+    def get_destination_data(self):
+        # Use the Sheety API to GET all the data in that sheet and print it out.
+        response = requests.get(url=SHEETY_PRICES_ENDPOINT, auth=self._authorization)
+        data = response.json()
+        print("API Response:", data)
+        print("Available keys:", list(data.keys()) if isinstance(data, dict) else "Response is not a dictionary")
         
-    def get_data(self):
+        # Check if the response has the expected structure
+        if "prices" in data:
+            self.destination_data = data["prices"]
+        else:
+            # Handle different possible response structures
+            if isinstance(data, list):
+                self.destination_data = data
+            elif isinstance(data, dict) and len(data) == 1:
+                # If there's only one key, use its value
+                key = list(data.keys())[0]
+                self.destination_data = data[key]
+            else:
+                print("Unexpected response structure:", data)
+                self.destination_data = []
         
-        response=requests.get(url=self.sheety_url,headers=sheety_headers)
-        self.data=response.json()["prices"]
-        return self.data
-    
-    def update_iata(self):
-        for city in self.data:
+        return self.destination_data
+
+    # In the DataManager Class make a PUT request and use the row id from sheet_data
+    # to update the Google Sheet with the IATA codes. (Do this using code).
+    def update_destination_codes(self):
+        for city in self.destination_data:
             new_data = {
                 "price": {
                     "iataCode": city["iataCode"]
                 }
             }
-            # Fix: update each row inside the loop
             response = requests.put(
-                url=f"{self.sheety_url}/{city['id']}",
-                json=new_data,
-                headers=sheety_headers
+                url=f"{SHEETY_PRICES_ENDPOINT}/{city['id']}",
+                json=new_data
             )
             print(response.text)
 
-
-
-
-
+    def get_customers_emails(self):
+        response=requests.get(url=Sheety_users_endpoint,auth=self._authorization)
+        res=response.json()
+        return res["users"]
