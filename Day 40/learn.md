@@ -1,4 +1,5 @@
 # HTML Heading Elements Guide
+## Reference
 HTML Web Docs: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements
 
 diffchecker:-https://www.diffchecker.com/
@@ -25,5 +26,4 @@ The purpose of heading elements comes from book binding. When you create a book 
 - Do not skip heading levels; for example, do not go from h1 directly to h3. If you use h3, there should be an h2 somewhere on the page.
 - These rules are conventions for professionalism and accessibility, not strict requirements. Your website will still function if you break them, but following them is best practice.
 
-## Reference
 
