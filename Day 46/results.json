@@ -1,0 +1,26 @@
+{
+    "display_name": "Ayush373",
+    "external_urls": {
+        "spotify": "https://open.spotify.com/user/313xyxecqfhdfwvhmv2cafzsttje"
+    },
+    "followers": {
+        "href": null,
+        "total": 0
+    },
+    "href": "https://api.spotify.com/v1/users/313xyxecqfhdfwvhmv2cafzsttje",
+    "id": "313xyxecqfhdfwvhmv2cafzsttje",
+    "images": [
+        {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab6775700000ee8578eb9c813bf3dad1196dfbd2",
+            "width": 300
+        },
+        {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67757000003b8278eb9c813bf3dad1196dfbd2",
+            "width": 64
+        }
+    ],
+    "type": "user",
+    "uri": "spotify:user:313xyxecqfhdfwvhmv2cafzsttje"
+}
