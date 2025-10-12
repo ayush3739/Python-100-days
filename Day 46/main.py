@@ -15,8 +15,8 @@ soup=BeautifulSoup(response.text,'html.parser')
 song_title=soup.select(selector="li ul li h3")
 song_names=[i.getText().strip() for i in song_title]
 
-CLIENT_ID = "fa5c055b77ed490c9191431b4005de31"
-CLIENT_SECRET = "69ef5f7487dc4a5abbb4b6b29aed38a9"
+CLIENT_ID = "Your_client_ID"
+CLIENT_SECRET = "Your_client_secret"
 
 REDIRECT_URI = "https://example.org/callback"
 
