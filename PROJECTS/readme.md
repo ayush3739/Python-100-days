@@ -23,6 +23,8 @@ A comprehensive collection of Python learning projects spanning various concepts
 - **Rain Alert** - Weather monitoring with SMS notifications
 - **Exercise Tracker** - Workout logging with natural language processing
 - **Birthday Wish and Quote Sender** - Automated birthday email system
+- **Spotify Billboard Playlist** - Create Spotify playlists from Billboard Hot 100 charts
+- **Amazon Price Tracker** - Monitor Amazon prices and send email alerts
 
 ### 🎨 Graphics & Art
 - **Hirst Painting using Turtle** - Dot painting generator inspired by Damien Hirst
@@ -32,6 +34,9 @@ A comprehensive collection of Python learning projects spanning various concepts
 - **Mail Merge Project Start** - Automated letter generation system
 - **Miles to KM** - Distance conversion utility
 - **Kanye Quotes Start** - Random quote generator
+
+### 🕷️ Web Scraping Projects
+- **100 Movies to Watch Start** - Scrape Empire's top 100 movies list
 
 ## Learning Progression
 These projects demonstrate progressive learning covering:
@@ -61,9 +66,11 @@ These projects demonstrate progressive learning covering:
 - **Turtle Graphics** - Graphics and animation
 - **Pandas** - Data analysis and CSV processing
 - **Requests** - HTTP API interactions
+- **Beautiful Soup** - Web scraping and HTML parsing
+- **Spotipy** - Spotify API integration
 - **Twilio** - SMS messaging service
 - **SMTP** - Email automation
-- **Various APIs** - Weather, stock, news, and more
+- **Various APIs** - Weather, stock, news, Spotify, and more
 
 ## Project Structure
 Each project includes:
