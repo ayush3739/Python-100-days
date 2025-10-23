@@ -25,6 +25,8 @@ A comprehensive collection of Python learning projects spanning various concepts
 - **Birthday Wish and Quote Sender** - Automated birthday email system
 - **Spotify Billboard Playlist** - Create Spotify playlists from Billboard Hot 100 charts
 - **Amazon Price Tracker** - Monitor Amazon prices and send email alerts
+- **Internet Speed Twitter Bot** - Automated internet speed testing and Twitter complaints to ISP
+- **Instagram Follower Bot** - Automated Instagram follower bot with smart following capabilities
 
 ### 🎨 Graphics & Art
 - **Hirst Painting using Turtle** - Dot painting generator inspired by Damien Hirst
@@ -58,6 +60,7 @@ These projects demonstrate progressive learning covering:
 - SMS integration with Twilio
 - Database operations
 - Web scraping and data analysis
+- Web automation with Selenium
 - Authentication and security
 
 ## Technologies Used
@@ -67,6 +70,7 @@ These projects demonstrate progressive learning covering:
 - **Pandas** - Data analysis and CSV processing
 - **Requests** - HTTP API interactions
 - **Beautiful Soup** - Web scraping and HTML parsing
+- **Selenium WebDriver** - Browser automation and web interaction
 - **Spotipy** - Spotify API integration
 - **Twilio** - SMS messaging service
 - **SMTP** - Email automation
