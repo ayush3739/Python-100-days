@@ -10,7 +10,7 @@ username=os.getenv('user_name')
 password=os.getenv('password') 
 Search="codinganddecoding"
 
-profile_path="C:/Users/ayush/AppData/Local/Google/Chrome/User Data/profile 4/"
+profile_path="Your chrome profile path"
 
 
 class InstaFollower:
@@ -94,4 +94,5 @@ class InstaFollower:
 object=InstaFollower()
 #object.login()
 object.find_followers()
+
 object.follow()
