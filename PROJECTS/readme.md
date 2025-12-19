@@ -40,6 +40,12 @@ A comprehensive collection of Python learning projects spanning various concepts
 ### 🕷️ Web Scraping Projects
 - **100 Movies to Watch Start** - Scrape Empire's top 100 movies list
 
+### 🌐 Web Applications
+- **Blog Website (Flask)** - Full blog with authentication, admin-only post management, comments, CKEditor rich text, Bootstrap styling, Gravatar avatars, and SMTP contact form. See project details at [PROJECTS/Blog Website/README.md](../PROJECTS/Blog%20Website/README.md).
+
+### 🔐 Authentication & Security
+- **Flask Auth Demo** - Registration, login/logout, protected routes (`@login_required`), and secure file delivery using `send_from_directory`. See app at [Day 68 (Flask Auth)/README.md](../Day%2068%20(Flask%20Auth)/README.md).
+
 ## Learning Progression
 These projects demonstrate progressive learning covering:
 
@@ -75,6 +81,12 @@ These projects demonstrate progressive learning covering:
 - **Twilio** - SMS messaging service
 - **SMTP** - Email automation
 - **Various APIs** - Weather, stock, news, Spotify, and more
+
+### Web App & Auth Stack (new)
+- **Flask, Flask-Login, Flask-SQLAlchemy** - Web app framework, session management, and ORM.
+- **Flask-CKEditor, Flask-Bootstrap, Flask-Gravatar** - Rich text editing, responsive UI, and avatars.
+- **python-dotenv** - Environment variable management for secrets.
+- **SMTP (Gmail App Passwords)** - Contact form email sending.
 
 ## Project Structure
 Each project includes:
