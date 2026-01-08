@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Ayush Maurya{% endblock %}
+
+{% block content %}
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Hi, I'm Ayush Maurya</h1> <!-- CHANGE: Add your name -->
+            <p class="tagline">Python Developer | Web Developer | Problem Solver</p> <!-- CHANGE: Add your tagline/role -->
+            <div class="cta-buttons">
+                <a href="{{ url_for('projects') }}" class="btn btn-primary"><i class="fas fa-briefcase"></i> View My Work</a>
+                <a href="{{ url_for('contact') }}" class="btn btn-secondary"><i class="fas fa-envelope"></i> Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PROJECTS SECTION -->
+    <section>
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <p class="subtitle">Check out some of my recent work</p> <!-- CHANGE: Customize subtitle -->
+            
+            <div class="projects-grid">
+                <!-- PROJECT CARD 1 -->
+                <!-- CHANGE: Add your actual projects here -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-blog" style="font-size: 4rem;"></i> <!-- CHANGE: Add project image or icon -->
+                    </div>
+                    <div class="project-content">
+                        <h3>Blog Website</h3> <!-- CHANGE: Add project name -->
+                        <p>A full-featured blog platform with authentication and CRUD operations.</p> <!-- CHANGE: Add description -->
+                        <div class="project-tags">
+                            <span class="tag">Python</span> <!-- CHANGE: Add relevant tags -->
+                            <span class="tag">Flask</span>
+                            <span class="tag">SQLAlchemy</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a> <!-- CHANGE: Add demo link -->
+                            <a href="#"><i class="fab fa-github"></i> GitHub</a> <!-- CHANGE: Add GitHub link -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT CARD 2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-film" style="font-size: 4rem;"></i> <!-- CHANGE: Add project image or icon -->
+                    </div>
+                    <div class="project-content">
+                        <h3>Top 10 Movies Website</h3> <!-- CHANGE: Add project name -->
+                        <p>Movie ranking website with TMDB API integration and database storage.</p> <!-- CHANGE: Add description -->
+                        <div class="project-tags">
+                            <span class="tag">Python</span> <!-- CHANGE: Add relevant tags -->
+                            <span class="tag">Flask</span>
+                            <span class="tag">API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a> <!-- CHANGE: Add demo link -->
+                            <a href="#"><i class="fab fa-github"></i> GitHub</a> <!-- CHANGE: Add GitHub link -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT CARD 3 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-coffee" style="font-size: 4rem;"></i> <!-- CHANGE: Add project image or icon -->
+                    </div>
+                    <div class="project-content">
+                        <h3>Coffee & Wifi Tracker</h3> <!-- CHANGE: Add project name -->
+                        <p>A web app tracking cafes with wifi quality and amenities.</p> <!-- CHANGE: Add description -->
+                        <div class="project-tags">
+                            <span class="tag">Flask</span> <!-- CHANGE: Add relevant tags -->
+                            <span class="tag">Bootstrap</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a> <!-- CHANGE: Add demo link -->
+                            <a href="#"><i class="fab fa-github"></i> GitHub</a> <!-- CHANGE: Add GitHub link -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="{{ url_for('projects') }}" class="btn btn-primary">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section style="background-color: var(--light-bg);">
+        <div class="container">
+            <h2>Skills & Technologies</h2>
+            <p class="subtitle">Technologies I work with</p>
+            
+            <div class="skills" style="justify-content: center; max-width: 800px; margin: 0 auto;">
+                <!-- CHANGE: Add your actual skills -->
+                <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
+                <span class="skill-tag"><i class="fas fa-flask"></i> Flask</span>
+                <span class="skill-tag"><i class="fab fa-html5"></i> HTML/CSS</span>
+                <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
+                <span class="skill-tag"><i class="fas fa-database"></i> SQL</span>
+                <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
+                <span class="skill-tag"><i class="fas fa-server"></i> REST APIs</span>
+                <span class="skill-tag"><i class="fas fa-robot"></i> Selenium</span>
+                <span class="skill-tag"><i class="fab fa-bootstrap"></i> Bootstrap</span>
+                <span class="skill-tag"><i class="fas fa-chart-line"></i> Pandas</span>
+            </div>
+        </div>
+    </section>
+{% endblock %}

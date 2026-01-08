@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}About - Ayush Maurya{% endblock %}
+
+{% block content %}
+    <!-- ABOUT SECTION -->
+    <section>
+        <div class="container">
+            <h2>About Me</h2>
+            <p class="subtitle">Get to know me better</p> <!-- CHANGE: Customize subtitle -->
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Hello! I'm Ayush Maurya</h3> <!-- CHANGE: Add your name -->
+                    <p>
+                        I'm a passionate Python developer with a strong interest in building 
+                        web applications, automation tools, and solving complex problems with code.
+                        <!-- CHANGE: Add your personal introduction -->
+                    </p>
+                    <p>
+                        I have completed the 100 Days of Code challenge, building numerous projects 
+                        ranging from web scraping bots to full-stack web applications using Flask. 
+                        I love learning new technologies and applying them to real-world problems.
+                        <!-- CHANGE: Add your experience and background -->
+                    </p>
+                    <p>
+                        When I'm not coding, you can find me exploring new technologies, 
+                        reading tech blogs, or working on personal projects that challenge me to grow.
+                        <!-- CHANGE: Add your hobbies and interests -->
+                    </p>
+
+                    <h3 style="margin-top: 2rem;"><i class="fas fa-tools"></i> Skills & Technologies</h3>
+                    <div class="skills">
+                        <!-- CHANGE: Add your actual skills -->
+                        <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
+                        <span class="skill-tag"><i class="fas fa-flask"></i> Flask</span>
+                        <span class="skill-tag"><i class="fab fa-html5"></i> HTML/CSS</span>
+                        <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
+                        <span class="skill-tag"><i class="fas fa-database"></i> SQL</span>
+                        <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
+                        <span class="skill-tag"><i class="fas fa-server"></i> REST APIs</span>
+                        <span class="skill-tag"><i class="fas fa-spider"></i> Web Scraping</span>
+                        <span class="skill-tag"><i class="fas fa-chart-line"></i> Pandas</span>
+                        <span class="skill-tag"><i class="fas fa-robot"></i> Selenium</span>
+                        <span class="skill-tag"><i class="fab fa-bootstrap"></i> Bootstrap</span>
+                        <span class="skill-tag"><i class="fas fa-code"></i> SQLAlchemy</span>
+                    </div>
+                </div>
+
+                <div class="about-image">
+                    <!-- CHANGE: Add your actual photo -->
+                    <!-- <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Ayush Maurya"> -->
+                    <div style="width: 100%; height: 400px; background: linear-gradient(135deg, #2c3e50, #3498db); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 5rem; box-shadow: 0 15px 40px rgba(0,0,0,0.2);">
+                        <i class="fas fa-user-circle"></i> <!-- CHANGE: Replace with your photo -->
+                    </div>
+                    <p style="margin-top: 1rem; text-align: center; color: #666;">
+                        <em>Add your professional photo here</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION/EXPERIENCE SECTION (OPTIONAL) -->
+    <section style="background-color: #ecf0f1;">
+        <div class="container">
+            <h2><i class="fas fa-graduation-cap"></i> Education & Experience</h2>
+            
+            <div style="max-width: 800px; margin: 2rem auto;">
+                <!-- EDUCATION ITEM -->
+                <div style="margin-bottom: 2rem; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border-left: 4px solid #3498db;">
+                    <h3 style="color: #2c3e50;"><i class="fas fa-university"></i> Your Degree</h3> <!-- CHANGE: Add your education -->
+                    <p style="color: #3498db; margin-bottom: 0.5rem; font-weight: 600;">University Name | 2020 - 2024</p> <!-- CHANGE: Add details -->
+                    <p>Description of your education and achievements.</p> <!-- CHANGE: Add description -->
+                </div>
+
+                <!-- EXPERIENCE ITEM -->
+                <div style="margin-bottom: 2rem; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border-left: 4px solid #e74c3c;">
+                    <h3 style="color: #2c3e50;"><i class="fas fa-briefcase"></i> Job Title</h3> <!-- CHANGE: Add your experience -->
+                    <p style="color: #e74c3c; margin-bottom: 0.5rem; font-weight: 600;">Company Name | 2023 - Present</p> <!-- CHANGE: Add details -->
+                    <p>Description of your role and responsibilities.</p> <!-- CHANGE: Add description -->
+                </div>
+
+                <!-- ADD MORE EDUCATION/EXPERIENCE ITEMS AS NEEDED -->
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY WORK WITH ME SECTION -->
+    <section>
+        <div class="container">
+            <h2><i class="fas fa-star"></i> Why Work With Me?</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div style="text-align: center; padding: 2rem; background: var(--light-bg); border-radius: 15px;">
+                    <i class="fas fa-lightbulb" style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 1rem;"></i>
+                    <h3>Problem Solver</h3>
+                    <p>I enjoy tackling complex challenges and finding elegant solutions.</p>
+                </div>
+                <div style="text-align: center; padding: 2rem; background: var(--light-bg); border-radius: 15px;">
+                    <i class="fas fa-rocket" style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 1rem;"></i>
+                    <h3>Fast Learner</h3>
+                    <p>Quick to adapt to new technologies and frameworks.</p>
+                </div>
+                <div style="text-align: center; padding: 2rem; background: var(--light-bg); border-radius: 15px;">
+                    <i class="fas fa-users" style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 1rem;"></i>
+                    <h3>Team Player</h3>
+                    <p>Collaborative approach with excellent communication skills.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
