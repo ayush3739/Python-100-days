@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Color Extracter</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Image Color Extracter Tool</h1>
+    </div>
+    <hr>
+
+    <div class="options">
+        <div class="option-box">
+            <form method="POST" enctype="multipart/form-data">
+                <label for="image-input">Select an Image:</label>
+                <input type="file" id="image-input" name="image-input" accept="image/*" required onchange="previewImage(event)">
+                <button type="submit" id="extract-btn">Extract Colors</button>
+            </form>
+        </div>
+    </div>
+
+    {% if colors %}
+    <div class="image-display">
+        {% if is_demo %}
+        <img id="uploaded-image" src="{{ url_for('static', filename='demo_image.png') }}" alt="Demo Image">
+        <p style="color: #666; margin-top: 10px;">Demo Image</p>
+        {% else %}
+        <img id="uploaded-image" src="{{ url_for('static', filename='uploaded_image.png') }}" alt="Uploaded Image">
+        <p style="color: #666; margin-top: 10px;">Your Uploaded Image</p>
+        {% endif %}
+    </div>
+
+    <div class="colors-container">
+        <h2>Top 20 Colors Extracted:</h2>
+        <div class="colors-grid">
+            {% for color in colors %}
+            <div class="color-card">
+                <div class="color-box" data-rgb="rgb{{ color.rgb }}"></div>
+                <p><strong>Hex:</strong> {{ color.hex }}</p>
+                <p><strong>RGB:</strong> rgb{{ color.rgb }}</p>
+                <p><strong>Percentage:</strong> {{ color.percentage }}%</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Hide the colors section and image display when new image is selected
+                const colorsContainer = document.querySelector('.colors-container');
+                const imageDisplay = document.querySelector('.image-display');
+                if (colorsContainer) {
+                    colorsContainer.style.display = 'none';
+                }
+                if (imageDisplay) {
+                    imageDisplay.style.display = 'none';
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('uploaded-image');
+                    if (img) {
+                        img.src = e.target.result;
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        document.querySelectorAll('.color-box').forEach(box => {
+            box.style.backgroundColor = box.getAttribute('data-rgb');
+        });
+    </script>
+</body>
+</html>
