@@ -22,8 +22,7 @@ chrome_options.add_experimental_option('detach', True)
 driver=webdriver.Chrome(options=chrome_options)
 driver.get(web_link)                                      
 time.sleep(3)
-# py.click(1227,31)
-# time.sleep(0.5)
+ 
 py.press('space')
 
 # --- obstacle detection using Pillow ---
