@@ -1,24 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>PerfectTense Test</title>
-  <script src="https://cdn.jsdelivr.net/npm/perfecttense-editor@latest/dist/pte.umd.js"></script>
+<meta charset="UTF-8">
+<title>Stock Dashboard Mock</title>
+<link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
 
-<h2>Grammar Editor</h2>
+<header>📊 Stock Dashboard</header>
 
-<textarea id="pte-editor" style="width: 600px; height: 200px;">
-Type your text here...
-</textarea>
+<div class="container">
+    
+    <div class="sidebar">
+        <h3>Watchlist</h3>
+        <div class="watch-item">AAPL</div>
+        <div class="watch-item">TSLA</div>
+        <div class="watch-item">MSFT</div>
+        <div class="watch-item">AMZN</div>
+        <div class="watch-item">RELIANCE.BSE</div>
+    </div>
 
-<script>
-  PerfectTenseEditor({
-    clientId: "696272ba1f7ebd07412b8644",
-    editorElement: document.getElementById('pte-editor')
-  });
-</script>
+    <div class="main">
+
+        <div class="search-box">
+            <input type="text" placeholder="Enter stock symbol e.g. AAPL">
+            <button>Search</button>
+        </div>
+
+        <div class="info-box">
+            <div><strong>Symbol:</strong> AAPL</div>
+            <div><strong>Price:</strong> $172.14</div>
+            <div><strong>Change:</strong> +1.45%</div>
+            <div><strong>Volume:</strong> 58M</div>
+        </div>
+
+        <div class="chart-box">
+            <div class="chart-title">Price (Daily)</div>
+            <div class="placeholder"></div>
+        </div>
+        
+        <div class="chart-box">
+            <div class="chart-title">Volume</div>
+            <div class="placeholder"></div>
+        </div>
+
+    </div>
+</div>
 
 </body>
 </html>
