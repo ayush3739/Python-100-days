@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 API_URL = "https://api.perfecttense.com/correct"
-USER_API_KEY = "696272ba1f7ebd07412b8644"
+USER_API_KEY = "Your api_key"
 APP_KEY = "YOUR_APP_KEY"
 
 @app.route("/")
