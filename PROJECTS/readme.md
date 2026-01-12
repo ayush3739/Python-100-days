@@ -2,6 +2,39 @@
 
 A comprehensive collection of Python learning projects spanning various concepts from basic programming to advanced topics like APIs, GUIs, web development, automation, and data science.
 
+## ⭐ Featured Projects
+
+### Top-Tier Projects
+These projects showcase advanced skills and are excellent portfolio pieces:
+
+1. **Blog Website** ⭐⭐⭐ - Full-featured blog with authentication, admin controls, comments, CKEditor rich text editor, and Gravatar avatars. Demonstrates Flask mastery, SQLAlchemy ORM, user authentication, and complete CRUD operations.
+
+2. **Stock Dashboard Website** ⭐⭐⭐ - Interactive stock market data visualization dashboard. Shows data fetching, processing, and real-time visualization capabilities with professional UI.
+
+3. **Flight Deals Finder** ⭐⭐⭐ - Sophisticated flight price tracker with automated notifications. Integrates multiple APIs, handles complex data processing, and provides intelligent price alerts.
+
+4. **Spotify Billboard Playlist** ⭐⭐ - Automatically creates Spotify playlists from Billboard Hot 100 charts. Combines web scraping with Spotify API integration and OAuth authentication.
+
+5. **Coffee and Wifi Cafe Tracker** ⭐⭐ - Full-stack web application with database integration, allowing users to discover and rate cafes. Clean UI and RESTful API design.
+
+6. **MY TOP 10 MOVIES Website** ⭐⭐ - Movie database web app with SQLite, form validation, and dynamic ranking system. Great example of database operations and user input handling.
+
+7. **Exercise Tracker** ⭐⭐ - Natural language processing meets API integration. Uses Nutritionix API to parse workout descriptions and logs data to Google Sheets.
+
+8. **Amazon Price Tracker** ⭐⭐ - Automated price monitoring with email alerts using web scraping and SMTP. Practical real-world automation.
+
+### Notable Automation Projects
+- **Google T Rex Playing Bot** - Advanced Selenium automation with obstacle detection
+- **Cookie Clicker Bot** - Game automation with optimized clicking strategies
+- **Instagram Follower Bot** - Social media automation (educational purposes)
+- **Gym Booking Bot** - Automated class booking system
+
+### Impressive GUI Applications
+- **Password Manager** - Secure password storage with encryption and generation
+- **Habit Tracker** - Beautiful daily habit tracking with Pixela API integration
+- **Image Watermark App** - Professional image processing with PIL
+- **Dangerous Writing App** - Unique writing tool with auto-delete feature
+
 ## Project Categories
 
 ### 🎮 Games & Interactive Applications
