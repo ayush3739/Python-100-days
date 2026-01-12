@@ -13,39 +13,321 @@
     
     <div class="sidebar">
         <h3>Watchlist</h3>
-        <div class="watch-item">AAPL</div>
-        <div class="watch-item">TSLA</div>
-        <div class="watch-item">MSFT</div>
-        <div class="watch-item">AMZN</div>
-        <div class="watch-item">RELIANCE.BSE</div>
+        {% for stock in stock_list %}
+        <a class="watch-item {% if stock == selected_symbol %}active{% endif %}" href="/?symbol={{ stock }}">{{ stock }}</a>
+        {% endfor %}
+
     </div>
 
     <div class="main">
 
-        <div class="search-box">
-            <input type="text" placeholder="Enter stock symbol e.g. AAPL">
-            <button>Search</button>
+        <form class="search-box" method="get" action="/">
+            <div class="search-wrap">
+                <input id="symbolInput" type="text" name="symbol" placeholder="Enter stock symbol e.g. AAPL" value="{{ selected_symbol }}">
+                <div id="suggestions" class="suggestions" style="display:none;"></div>
+            </div>
+            <button type="submit">Search</button>
+        </form>
+
+        <div class="refresh-row">
+            <button type="button" id="refreshBtn">Fetch latest data</button>
+            <div id="refreshMsg" class="refresh-msg"></div>
         </div>
 
         <div class="info-box">
-            <div><strong>Symbol:</strong> AAPL</div>
-            <div><strong>Price:</strong> $172.14</div>
-            <div><strong>Change:</strong> +1.45%</div>
-            <div><strong>Volume:</strong> 58M</div>
+            {% if selected_quote %}
+            <div><strong>Symbol:</strong> {{ selected_quote["01. symbol"] }}</div>
+            <div><strong>Price:</strong> {{ selected_quote["05. price"] }}</div>
+            <div><strong>Change:</strong> {{ selected_quote["10. change percent"] }}</div>
+            <div><strong>Volume:</strong> {{ selected_quote["06. volume"] }}</div>
+            <div><strong>Latest Date:</strong> {{ selected_quote.get("07. latest trading day", "-") }}</div>
+            {% else %}
+            <div><strong>Symbol:</strong> {{ selected_symbol }}</div>
+            <div>No data found for this symbol in Global_Quotes.json</div>
+            {% endif %}
         </div>
 
         <div class="chart-box">
-            <div class="chart-title">Price (Daily)</div>
-            <div class="placeholder"></div>
+            <div class="chart-title-row">
+                <div class="chart-title">Price (Daily)</div>
+                <label class="range-select">
+                    <span>Range:</span>
+                    <select id="daysSelectPrice">
+                        <option value="30">30 days</option>
+                        <option value="60" selected>60 days</option>
+                        <option value="90">90 days</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="chart-canvas">
+                <div id="priceChartMsg" style="display:none; padding:10px; text-align:center;">
+                    No data available for "{{ selected_symbol }}"
+                </div>
+                <canvas id="stockChart"></canvas>
+            </div>
         </div>
         
         <div class="chart-box">
-            <div class="chart-title">Volume</div>
-            <div class="placeholder"></div>
+            <div class="chart-title-row">
+                <div class="chart-title">Volume</div>
+                <label class="range-select">
+                    <span>Range:</span>
+                    <select id="daysSelectVolume">
+                        <option value="30">30 days</option>
+                        <option value="60" selected>60 days</option>
+                        <option value="90">90 days</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="chart-canvas">
+                <div id="volumeChartMsg" style="display:none; padding:10px; text-align:center;">
+                    No data available for "{{ selected_symbol }}"
+                </div>
+                <canvas id="volumeChart"></canvas>
+            </div>
         </div>
 
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+let priceChartInstance = null;
+let volumeChartInstance = null;
+
+function showMsg(elId, msg) {
+  const el = document.getElementById(elId);
+  el.textContent = msg;
+  el.style.display = "block";
+}
+function hideMsg(elId) {
+  document.getElementById(elId).style.display = "none";
+}
+
+function loadPriceChart(days) {
+  fetch(`/stock/{{ selected_symbol|e }}?days=${days}`)
+    .then(async (res) => {
+      const data = await res.json();
+      if (!res.ok || data.error) throw data;
+      return data;
+    })
+    .then(data => {
+      hideMsg("priceChartMsg");
+      const ctx = document.getElementById('stockChart').getContext('2d');
+      if (priceChartInstance) priceChartInstance.destroy();
+
+      priceChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: data.dates,
+          datasets: [{
+            label: `Closing Price (${days} days)`,
+            data: data.closes,
+            borderColor: 'blue',
+            tension: 0.2,
+            borderWidth: 2,
+            pointRadius: 0,
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false,
+          scales: { x: { ticks: { maxTicksLimit: 10 } }, y: { beginAtZero: false } }
+        }
+      });
+    })
+    .catch(err => {
+      if (priceChartInstance) priceChartInstance.destroy();
+      showMsg("priceChartMsg", (err && err.error) ? err.error : "No data available");
+    });
+}
+
+function loadVolumeChart(days) {
+  fetch(`/stock/{{ selected_symbol|e }}?days=${days}`)
+    .then(async (res) => {
+      const data = await res.json();
+      if (!res.ok || data.error) throw data;
+      return data;
+    })
+    .then(data => {
+      hideMsg("volumeChartMsg");
+      const ctx = document.getElementById('volumeChart').getContext('2d');
+      if (volumeChartInstance) volumeChartInstance.destroy();
+
+      volumeChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: data.dates,
+          datasets: [{
+            label: `Volume (${days} days)`,
+            data: data.volume,
+            backgroundColor: 'rgba(0, 119, 255, 0.35)',
+            borderColor: 'rgba(0, 119, 255, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false,
+          scales: { x: { ticks: { maxTicksLimit: 10 } }, y: { beginAtZero: false } }
+        }
+      });
+    })
+    .catch(err => {
+      if (volumeChartInstance) volumeChartInstance.destroy();
+      showMsg("volumeChartMsg", (err && err.error) ? err.error : "No data available");
+    });
+}
+
+const daysSelectPrice = document.getElementById("daysSelectPrice");
+const daysSelectVolume = document.getElementById("daysSelectVolume");
+
+loadPriceChart(daysSelectPrice.value);
+loadVolumeChart(daysSelectVolume.value);
+
+daysSelectPrice.addEventListener("change", () => loadPriceChart(daysSelectPrice.value));
+daysSelectVolume.addEventListener("change", () => loadVolumeChart(daysSelectVolume.value));
+
+const selectedSymbol = "{{ selected_symbol|e }}";
+const COOLDOWN_MS = 6 * 60 * 60 * 1000;
+const cooldownKey = `refreshCooldown:${selectedSymbol}`;
+
+const refreshBtn = document.getElementById("refreshBtn");
+const refreshMsg = document.getElementById("refreshMsg");
+
+function formatRemaining(ms) {
+  const totalSec = Math.max(0, Math.floor(ms / 1000));
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  return `${h}h ${m}m`;
+}
+
+function updateRefreshButton() {
+  const until = Number(localStorage.getItem(cooldownKey) || "0");
+  const now = Date.now();
+  const remaining = until - now;
+
+  if (remaining > 0) {
+    refreshBtn.disabled = true;
+    refreshBtn.textContent = `Fetch latest (available in ${formatRemaining(remaining)})`;
+  } else {
+    refreshBtn.disabled = false;
+    refreshBtn.textContent = "Fetch latest data";
+  }
+}
+
+updateRefreshButton();
+setInterval(updateRefreshButton, 30 * 1000);
+
+refreshBtn.addEventListener("click", async () => {
+  refreshMsg.textContent = "";
+  refreshBtn.disabled = true;
+  refreshBtn.textContent = "Fetching...";
+
+  try {
+    const res = await fetch("/refresh", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ symbol: selectedSymbol })
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data && data.status === "already_latest") {
+      refreshMsg.textContent = data.message || "Data is already latest.";
+      if (data.retry_after_seconds) {
+        localStorage.setItem(cooldownKey, String(Date.now() + data.retry_after_seconds * 1000));
+      }
+      updateRefreshButton();
+      return;
+    }
+
+    if (!res.ok) {
+      if (data && data.retry_after_seconds) {
+        localStorage.setItem(cooldownKey, String(Date.now() + data.retry_after_seconds * 1000));
+        updateRefreshButton();
+      }
+      refreshMsg.textContent = (data && data.error) ? data.error : "Refresh failed";
+      updateRefreshButton();
+      return;
+    }
+
+    localStorage.setItem(cooldownKey, String(Date.now() + COOLDOWN_MS));
+    refreshMsg.textContent = (data && data.message) ? data.message : "Updated cache. Reloading charts...";
+    updateRefreshButton();
+
+    loadPriceChart(daysSelectPrice.value);
+    loadVolumeChart(daysSelectVolume.value);
+  } catch (e) {
+    refreshMsg.textContent = "Refresh failed";
+    updateRefreshButton();
+  }
+});
+
+const symbolInput = document.getElementById("symbolInput");
+const suggestionsEl = document.getElementById("suggestions");
+
+let searchTimer = null;
+
+function clearSuggestions() {
+  suggestionsEl.innerHTML = "";
+  suggestionsEl.style.display = "none";
+}
+
+function renderSuggestions(matches) {
+  if (!matches || matches.length === 0) return clearSuggestions();
+
+  suggestionsEl.innerHTML = matches.map(m => {
+    const sym = (m.symbol || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const name = (m.name || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const region = (m.region || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return `<button type="button" class="suggestion-item" data-symbol="${sym}">
+              <span class="s-sym">${sym}</span>
+              <span class="s-name">${name}</span>
+              <span class="s-region">${region}</span>
+            </button>`;
+  }).join("");
+
+  suggestionsEl.style.display = "block";
+}
+
+symbolInput.addEventListener("input", () => {
+  const start = symbolInput.selectionStart;
+  const end = symbolInput.selectionEnd;
+  const upper = symbolInput.value.toUpperCase();
+  if (symbolInput.value !== upper) {
+    symbolInput.value = upper;
+    symbolInput.setSelectionRange(start, end);
+  }
+
+  const q = symbolInput.value.trim();
+  if (searchTimer) clearTimeout(searchTimer);
+  if (!q) return clearSuggestions();
+
+  searchTimer = setTimeout(async () => {
+    try {
+      const res = await fetch(`/search?keywords=${encodeURIComponent(q)}`);
+      const data = await res.json();
+      if (!res.ok || data.error) return clearSuggestions();
+      renderSuggestions(data.matches);
+    } catch {
+      clearSuggestions();
+    }
+  }, 250);
+});
+
+suggestionsEl.addEventListener("click", (e) => {
+  const btn = e.target.closest(".suggestion-item");
+  if (!btn) return;
+  const sym = btn.getAttribute("data-symbol");
+  symbolInput.value = sym;
+  clearSuggestions();
+  symbolInput.form.submit();
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target === symbolInput || suggestionsEl.contains(e.target)) return;
+  clearSuggestions();
+});
+</script>
 
 </body>
 </html>
